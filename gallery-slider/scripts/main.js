@@ -47,3 +47,23 @@ rightBtn.addEventListener("click", () => {
     cards.style.left = `${-500 * sliderIndex}px`;
   }
 });
+
+function createRounds() {
+  const container = document.createElement("div");
+  container.classList.add("rounds");
+  frame.append(container);
+  for (let i = 0; i < images.length; i++) {
+    const button = document.createElement("button");
+    container.append(button);
+    button.addEventListener("click", () => {
+      sliderIndex = i;
+      cards.style.left = `${-500 * sliderIndex}px`;
+      const allButtons = button.parentElement.children;
+      for (let j = 0; j < allButtons.length; j++) {
+        allButtons[j].classList.remove("active");
+      }
+      button.classList.add("active");
+    });
+  }
+}
+createRounds();
