@@ -27,43 +27,73 @@ frame.classList.add("frame");
 cards.classList.add("cards");
 triggers.classList.add("triggers");
 
-images.forEach((image) => {
+// один контейнер для всех радиокнопок
+const container = document.createElement("div");
+container.classList.add("rounds");
+frame.append(container);
+
+// один forEach для всего
+images.forEach((image, index) => {
   const card = document.createElement("div");
   card.classList.add("card");
   card.style.backgroundImage = `url("${image}")`;
   cards.append(card);
+
+  const button = document.createElement("button");
+  container.append(button);
+
+  //   первая радиокнопка с классом active
+  if (index === 0) {
+    button.classList.add("active");
+  }
+  // событие нажатия на кнопки
+  button.addEventListener("click", () => {
+    sliderIndex = index;
+    cards.style.left = `${-500 * sliderIndex}px`;
+
+    images.forEach((image, i) => {
+      container.children[i].classList.remove("active");
+    });
+
+    button.classList.add("active");
+  });
 });
 
+// кнопка влево
 leftBtn.addEventListener("click", () => {
   if (sliderIndex > 0) {
     sliderIndex--;
-    cards.style.left = `${-500 * sliderIndex}px`;
+    container.children[sliderIndex].click();
   }
 });
 
+// кнопка вправо
 rightBtn.addEventListener("click", () => {
   if (sliderIndex < images.length - 1) {
     sliderIndex++;
-    cards.style.left = `${-500 * sliderIndex}px`;
+    container.children[sliderIndex].click();
   }
 });
 
-function createRounds() {
-  const container = document.createElement("div");
-  container.classList.add("rounds");
-  frame.append(container);
-  for (let i = 0; i < images.length; i++) {
-    const button = document.createElement("button");
-    container.append(button);
-    button.addEventListener("click", () => {
-      sliderIndex = i;
-      cards.style.left = `${-500 * sliderIndex}px`;
-      const allButtons = button.parentElement.children;
-      for (let j = 0; j < allButtons.length; j++) {
-        allButtons[j].classList.remove("active");
-      }
-      button.classList.add("active");
-    });
-  }
-}
-createRounds();
+// function createRounds() {
+//   const container = document.createElement("div");
+//   container.classList.add("rounds");
+//   frame.append(container);
+
+//   for (let i = 0; i < images.length; i++) {
+//     const button = document.createElement("button");
+//     container.append(button);
+
+//     button.addEventListener("click", () => {
+//       sliderIndex = i;
+//       cards.style.left = `${-500 * sliderIndex}px`;
+//       const allButtons = button.parentElement.children;
+
+//       for (let j = 0; j < allButtons.length; j++) {
+//         allButtons[j].classList.remove("active");
+//       }
+//       button.classList.add("active");
+//     });
+//   }
+// }
+// createRounds();
