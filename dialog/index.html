@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/main.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <button class="open-modal-btn">Open modal</button>
+        <div class="modal modal-hidden">
+            <div class="modal-body">
+                <button class="close-x-btn">X</button>
+                <form class="login-form">
+                    <div class="form-content">
+                        <h2 id="form-title">Registration</h2>
+                        <input type="text" id="name" name="name" placeholder="Your Name" />
+                        <input type="text" id="second-name" name="second-name" placeholder="Your Second Name" />
+                        <input type="email" id="login" name="login" placeholder="Your email address" />
+                        <input type="password" id="password" name="password" placeholder="Enter password here" />
+                        <button type="submit" class="submit open-inside-modal-btn" id="submit-btn">Log In</button>
+
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <div class="inside-modal inside-modal-hidden">
+            <div class="inside-modal-body">
+                <button class="close-x-btn">X</button>
+                inside modal body content
+            </div>
+        </div>
+    </div>
+</body>
+<script src="scripts/main.js"></script>
+
+</html>
