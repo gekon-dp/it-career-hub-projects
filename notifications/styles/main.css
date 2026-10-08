@@ -85,15 +85,27 @@ form button:active,
 /* ==========================================================================
  ЦВЕТА КНОПОК И УВЕДОМЛЕНИЙ
 ========================================================================== */
-form button[type="submit"],
+form button[type="submit"] {
+  background-color: #8e44ad;
+  color: white;
+}
+
+form button[type="submit"]:hover {
+  background-color: #9b59b6;
+}
+
+.notification-item.success {
+  background-color: #9b59b6;
+  border-left: 5px solid #8e44ad;
+}
+
 .recieved-btn {
   background-color: #3b82f6;
   color: white;
 }
 
-form button[type="submit"]:hover,
 .recieved-btn:hover {
-  background-color: #2563eb;
+  background-color: #1d4ed8;
 }
 
 .notification-item.info {
@@ -110,9 +122,9 @@ form button[type="submit"]:hover,
   background-color: #059669;
 }
 
-.notification-item.success {
+.notification-item.create {
   background-color: #10b981;
-  border-left: 5px solid #047857;
+  border-left: 5px solid #059669;
 }
 
 .sent-btn {
@@ -127,7 +139,21 @@ form button[type="submit"]:hover,
 .notification-item.warning {
   background-color: #f59e0b;
   border-left: 5px solid #b45309;
-  color: #1f2937;
+  color: white;
+}
+
+.error-btn {
+  background-color: #ef4444;
+  color: white;
+}
+
+.error-btn:hover {
+  background-color: #dc2626;
+}
+
+.notification-item.error {
+  background-color: #ef4444;
+  border-left: 5px solid #b91c1c;
 }
 
 /* ==========================================================================
