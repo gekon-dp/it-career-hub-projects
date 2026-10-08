@@ -66,6 +66,7 @@
   background-color: white;
   border: 2px solid black;
   border-radius: 50%;
+  cursor: pointer;
 }
 
 .rounds .active {

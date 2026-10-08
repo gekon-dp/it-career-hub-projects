@@ -1,6 +1,7 @@
 const root = document.querySelector("#root");
 
 let sliderIndex = 0;
+let autoScrollInterval; // Переменная для хранения таймера
 
 const images = [
   "https://www.vinterier.ru/pictures/shop/krasivyiy-peiyzag-kartina-maslom-40x30.jpg",
@@ -27,12 +28,11 @@ frame.classList.add("frame");
 cards.classList.add("cards");
 triggers.classList.add("triggers");
 
-// один контейнер для всех радиокнопок
 const container = document.createElement("div");
 container.classList.add("rounds");
 frame.append(container);
 
-// один forEach для всего
+// Создание слайдов и круглых кнопок
 images.forEach((image, index) => {
   const card = document.createElement("div");
   card.classList.add("card");
@@ -42,58 +42,66 @@ images.forEach((image, index) => {
   const button = document.createElement("button");
   container.append(button);
 
-  //   первая радиокнопка с классом active
   if (index === 0) {
     button.classList.add("active");
   }
-  // событие нажатия на кнопки
+
   button.addEventListener("click", () => {
     sliderIndex = index;
-    cards.style.left = `${-500 * sliderIndex}px`;
-
-    images.forEach((image, i) => {
-      container.children[i].classList.remove("active");
-    });
-
-    button.classList.add("active");
+    updateSlider();
+    resetAutoScroll(); // Сбрасываем таймер при ручном переключении
   });
 });
 
-// кнопка влево
+// Функция обновления состояния слайдера
+function updateSlider() {
+  cards.style.left = `${-500 * sliderIndex}px`;
+
+  // Эффективное переключение активного класса без лишнего цикла по массиву картинок
+  Array.from(container.children).forEach((btn, i) => {
+    btn.classList.toggle("active", i === sliderIndex);
+  });
+}
+
+// Кнопка влево с бесконечной прокруткой
 leftBtn.addEventListener("click", () => {
-  if (sliderIndex > 0) {
-    sliderIndex--;
-    container.children[sliderIndex].click();
-  }
+  // Если это первый слайд, перепрыгиваем на последний, иначе уменьшаем индекс
+  sliderIndex = sliderIndex > 0 ? sliderIndex - 1 : images.length - 1;
+  updateSlider();
+  resetAutoScroll();
 });
 
-// кнопка вправо
+// Кнопка вправо с бесконечной прокруткой
 rightBtn.addEventListener("click", () => {
-  if (sliderIndex < images.length - 1) {
-    sliderIndex++;
-    container.children[sliderIndex].click();
-  }
+  // Если это последний слайд, перепрыгиваем на первый, иначе увеличиваем индекс
+  sliderIndex = sliderIndex < images.length - 1 ? sliderIndex + 1 : 0;
+  updateSlider();
+  resetAutoScroll();
 });
 
-// function createRounds() {
-//   const container = document.createElement("div");
-//   container.classList.add("rounds");
-//   frame.append(container);
+// Функция запуска автоматического переключения
+function startAutoScroll() {
+  autoScrollInterval = setInterval(() => {
+    sliderIndex = sliderIndex < images.length - 1 ? sliderIndex + 1 : 0;
+    updateSlider();
+  }, 5000); // Интервал 5 секунд
+}
 
-//   for (let i = 0; i < images.length; i++) {
-//     const button = document.createElement("button");
-//     container.append(button);
+// Функция сброса таймера (чтобы слайд не переключался сразу после того, как пользователь сам нажал кнопку)
+function resetAutoScroll() {
+  clearInterval(autoScrollInterval);
+  startAutoScroll();
+}
 
-//     button.addEventListener("click", () => {
-//       sliderIndex = i;
-//       cards.style.left = `${-500 * sliderIndex}px`;
-//       const allButtons = button.parentElement.children;
+// Инициализация автоскролла при загрузке
+startAutoScroll();
 
-//       for (let j = 0; j < allButtons.length; j++) {
-//         allButtons[j].classList.remove("active");
-//       }
-//       button.classList.add("active");
-//     });
-//   }
-// }
-// createRounds();
+// Останавливаем автопрокрутку при наведении мыши на фрейм слайдера
+frame.addEventListener("mouseenter", () => {
+  clearInterval(autoScrollInterval);
+});
+
+// Возобновляем автопрокрутку, когда мышь покидает фрейм
+frame.addEventListener("mouseleave", () => {
+  startAutoScroll();
+});
