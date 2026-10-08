@@ -65,21 +65,3 @@ nav {
 .overlay-hidden {
   display: none;
 }
-
-/* Скрываем контент по умолчанию */
-.accordion-content {
-  display: none;
-}
-
-/* Показываем контент, только когда у родителя есть класс active */
-.nav-menu-item.active .accordion-content {
-  display: block;
-}
-
-/* Курсор-рука только для тех заголовков, у которых есть контент */
-.accordion-header {
-  width: 100%;
-}
-.accordion-header:not(.no-content) {
-  cursor: pointer;
-}
