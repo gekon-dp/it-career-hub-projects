@@ -29,7 +29,7 @@ modalOverlay.addEventListener("click", (event) => {
 // любой пункт меню снизу появились еще два-три подраздела.
 
 const accordionData = {
-  Home: ["Скрытый контент первого блока.", "Ещё немного контента для Home."],
+  Home: ["1.1 Shop", "1.2 Contacts", "1.3 About us"],
   Messages: ["Скрытый контент для Messages."],
   Documents: ["Скрытый контент для Documents."],
   Profile: ["Скрытый контент для Profile."],
@@ -47,7 +47,7 @@ menuItems.forEach((item) => {
     accordionData[itemText].forEach((text) => {
       const contentDiv = document.createElement("div");
       contentDiv.className = "accordion-content";
-      contentDiv.innerHTML = `<p>${text}</p>`;
+      contentDiv.textContent = text;
       item.appendChild(contentDiv);
     });
 
