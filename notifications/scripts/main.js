@@ -16,14 +16,44 @@
 //   type: String,
 //   info: String,
 // }
-// class Notifications {
-//     static notoficationsList = [];
-//     constructor(title, type, info) {
-//       this.id = Math.random();
-//       this.title = title;
-//       this.type = type; // "success" | "info" | "error"
-//       this.info = info;
-//     }
-//     static renderNotifications(list) {}
-//     static deleteNotifications(id) {}
-//   }
+//
+
+const form = document.querySelector("form");
+const orderBtnsBlock = document.querySelector(".order-btns");
+const notificationsContainer = document.querySelector(
+  ".notifications-container",
+);
+
+class Notifications {
+  static notificationsList = [];
+
+  constructor(title, type, info) {
+    this.id = Math.random();
+    this.title = title;
+    this.type = type;
+    this.info = info;
+
+    Notifications.notificationsList.push(this);
+    Notifications.renderNotifications();
+  }
+
+  static renderNotifications() {
+    notificationsContainer.innerHTML = "";
+    Notifications.notificationsList.forEach((notif) => {
+      const notifElement = document.createElement("div");
+      notifElement.className = `notification-item ${notif.type}`;
+      notifElement.innerHTML = `
+                <h4>${notif.title}</h4>
+                <p>${notif.info}</p>
+            `;
+      notificationsContainer.appendChild(notifElement);
+    });
+  }
+}
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  new Notifications("Успех", "success", "Заказ успешно создан!");
+  orderBtnsBlock.classList.remove("hidden");
+  form.reset();
+});
