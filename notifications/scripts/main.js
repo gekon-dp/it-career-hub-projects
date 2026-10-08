@@ -102,5 +102,5 @@ sentBtn.addEventListener("click", () => {
 });
 
 recievedBtn.addEventListener("click", () => {
-  new Notifications("Статус", "success", "Заказ успешно получен покупателем");
+  new Notifications("Статус", "info", "Заказ успешно получен покупателем");
 });
