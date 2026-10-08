@@ -23,6 +23,7 @@ form,
 form h2 {
   padding-bottom: 12px;
 }
+
 form input,
 form button,
 .order-btns button {
@@ -39,18 +40,91 @@ form button,
   display: none;
 }
 
+/* ==========================================
+ СКРОЛЛА И АНИМАЦИЙ
+ ========================================== */
 .notifications-container {
   position: fixed;
   top: 20px;
   right: 20px;
   width: 320px;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
   z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
+/* Карточка уведомления */
 .notification-item {
-  padding: 16px;
+  position: relative;
+  padding: 16px 40px 16px 16px;
   border-radius: 8px;
   color: white;
-  margin-bottom: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
   background-color: #10b981;
+  animation: slideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transition: all 0.3s ease;
+  scrollbar-width: none; /* Скрывает скроллбар в Firefox */
+}
+
+/* Скрывает скроллбар в Chrome/Safari */
+.notifications-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Стилизация базовых типов (из прошлых коммитов) */
+.notification-item.success {
+  background-color: #10b981;
+}
+.notification-item.warning {
+  background-color: #f59e0b;
+  color: #1f2937;
+}
+
+/* анимация уезда вправо */
+.notification-item.hide {
+  animation: slideOut 0.3s ease forwards;
+}
+
+/* Кнопка закрытия */
+.notification-close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 22px;
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.notification-close:hover {
+  opacity: 1;
+}
+
+/* Ключевые кадры анимаций */
+@keyframes slideIn {
+  from {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(120%);
+    opacity: 0;
+  }
 }
