@@ -23,6 +23,9 @@ const orderBtnsBlock = document.querySelector(".order-btns");
 const notificationsContainer = document.querySelector(
   ".notifications-container",
 );
+const paidBtn = document.querySelector(".paid-btn");
+const sentBtn = document.querySelector(".sent-btn");
+const recievedBtn = document.querySelector(".recieved-btn");
 
 class Notifications {
   static notificationsList = [];
@@ -56,4 +59,16 @@ form.addEventListener("submit", (event) => {
   new Notifications("Успех", "success", "Заказ успешно создан!");
   orderBtnsBlock.classList.remove("hidden");
   form.reset();
+});
+
+paidBtn.addEventListener("click", () => {
+  new Notifications("Оплата", "success", "Заказ успешно оплачен");
+});
+
+sentBtn.addEventListener("click", () => {
+  new Notifications("Доставка", "warning", "Заказ передан в службу доставки");
+});
+
+recievedBtn.addEventListener("click", () => {
+  new Notifications("Статус", "success", "Заказ успешно получен покупателем");
 });
