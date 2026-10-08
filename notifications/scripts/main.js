@@ -52,6 +52,29 @@ class Notifications {
       notificationsContainer.appendChild(notifElement);
     });
   }
+
+  static renderNotifications() {
+    notificationsContainer.innerHTML = "";
+    Notifications.notificationsList.forEach((notif) => {
+      const notifElement = document.createElement("div");
+      notifElement.className = `notification-item ${notif.type}`;
+      // Добавляем атрибут
+      notifElement.setAttribute("data-id", notif.id);
+      notifElement.innerHTML = `
+            <h4>${notif.title}</h4>
+            <p>${notif.info}</p>
+            <button class="notification-close">&times;</button>
+        `;
+      notificationsContainer.appendChild(notifElement);
+    });
+  }
+
+  static deleteNotifications(id) {
+    Notifications.notificationsList = Notifications.notificationsList.filter(
+      (notif) => notif.id !== id,
+    );
+    Notifications.renderNotifications();
+  }
 }
 
 form.addEventListener("submit", (event) => {
@@ -71,4 +94,12 @@ sentBtn.addEventListener("click", () => {
 
 recievedBtn.addEventListener("click", () => {
   new Notifications("Статус", "success", "Заказ успешно получен покупателем");
+});
+
+notificationsContainer.addEventListener("click", (event) => {
+  if (event.target.classList.contains("notification-close")) {
+    const parentCard = event.target.closest(".notification-item");
+    const notifId = Number(parentCard.dataset.id);
+    Notifications.deleteNotifications(notifId);
+  }
 });
