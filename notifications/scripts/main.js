@@ -37,45 +37,54 @@ class Notifications {
     this.info = info;
 
     Notifications.notificationsList.push(this);
-    Notifications.renderNotifications();
+    Notifications.renderNotifications(this);
   }
 
-  static renderNotifications() {
-    notificationsContainer.innerHTML = "";
-    Notifications.notificationsList.forEach((notif) => {
-      const notifElement = document.createElement("div");
-      notifElement.className = `notification-item ${notif.type}`;
-      notifElement.innerHTML = `
-                <h4>${notif.title}</h4>
-                <p>${notif.info}</p>
-            `;
-      notificationsContainer.appendChild(notifElement);
-    });
-  }
+  static renderNotifications(newNotif) {
+    if (!newNotif) return;
 
-  static renderNotifications() {
-    notificationsContainer.innerHTML = "";
-    Notifications.notificationsList.forEach((notif) => {
-      const notifElement = document.createElement("div");
-      notifElement.className = `notification-item ${notif.type}`;
-      // Добавляем атрибут
-      notifElement.setAttribute("data-id", notif.id);
-      notifElement.innerHTML = `
-            <h4>${notif.title}</h4>
-            <p>${notif.info}</p>
-            <button class="notification-close">&times;</button>
-        `;
-      notificationsContainer.appendChild(notifElement);
-    });
+    const notifElement = document.createElement("div");
+    notifElement.className = `notification-item ${newNotif.type}`;
+    notifElement.setAttribute("data-id", newNotif.id);
+
+    notifElement.innerHTML = `
+        <h4>${newNotif.title}</h4>
+        <p>${newNotif.info}</p>
+        <button class="notification-close">&times;</button>
+    `;
+
+    notificationsContainer.appendChild(notifElement);
+    notificationsContainer.scrollTop = notificationsContainer.scrollHeight;
   }
 
   static deleteNotifications(id) {
-    Notifications.notificationsList = Notifications.notificationsList.filter(
-      (notif) => notif.id !== id,
+    const notifElement = notificationsContainer.querySelector(
+      `[data-id="${id}"]`,
     );
-    Notifications.renderNotifications();
+
+    if (notifElement) {
+      notifElement.classList.add("hide");
+
+      notifElement.addEventListener(
+        "animationend",
+        () => {
+          Notifications.notificationsList =
+            Notifications.notificationsList.filter((notif) => notif.id !== id);
+          notifElement.remove();
+        },
+        { once: true },
+      );
+    }
   }
 }
+
+notificationsContainer.addEventListener("click", (event) => {
+  if (event.target.classList.contains("notification-close")) {
+    const parentCard = event.target.closest(".notification-item");
+    const notifId = Number(parentCard.dataset.id);
+    Notifications.deleteNotifications(notifId);
+  }
+});
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -94,12 +103,4 @@ sentBtn.addEventListener("click", () => {
 
 recievedBtn.addEventListener("click", () => {
   new Notifications("Статус", "success", "Заказ успешно получен покупателем");
-});
-
-notificationsContainer.addEventListener("click", (event) => {
-  if (event.target.classList.contains("notification-close")) {
-    const parentCard = event.target.closest(".notification-item");
-    const notifId = Number(parentCard.dataset.id);
-    Notifications.deleteNotifications(notifId);
-  }
 });
