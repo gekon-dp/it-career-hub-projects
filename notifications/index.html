@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/main.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <form>
+        <h2>Make an order</h2>
+        <input type="text" placeholder="Address" required>
+        <input type="text" placeholder="Price" required>
+        <input type="text" placeholder="Reciever" required>
+        <button type="submit">Create</button>
+    </form>
+    <div class="order-btns hidden">
+        <button class="paid-btn">Paid</button>
+        <button class="sent-btn">Sent</button>
+        <button class="recieved-btn">Recieved</button>
+    </div>
+    <div class="notifications-container"></div>
+</body>
+<script src="scripts/main.js"></script>
+
+</html>
