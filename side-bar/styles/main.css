@@ -31,6 +31,7 @@ nav {
 .nav-menu-open {
   transform: translateX(0);
   box-shadow: 4px 0px 7px 4px #00000080;
+  z-index: 3;
 }
 
 .nav-menu span {
@@ -45,4 +46,21 @@ nav {
   padding: 12px;
   border-radius: 12px;
   background-color: peachpuff;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #00000050;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.overlay-hidden {
+  display: none;
 }
