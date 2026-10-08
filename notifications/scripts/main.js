@@ -31,7 +31,7 @@ class Notifications {
   constructor(title, type, info) {
     this.id = Math.random();
     this.title = title;
-    this.type = type; // "success" | "warning" | "error" | "info"
+    this.type = type; // "success" | "warning" | "error" | "info" | "create"
     this.info = info;
 
     // Сохраняем экземпляр в массив
@@ -43,15 +43,26 @@ class Notifications {
   // Принимает объект нового уведомления и точечно рендерит его в DOM
   static renderNotifications(newNotif) {
     if (!newNotif) return;
+    let iconClass = "fa-solid fa-circle-plus"; // по умолчанию для create
+    if (newNotif.type === "success") iconClass = "fa-solid fa-circle-check";
+    if (newNotif.type === "warning")
+      iconClass = "fa-solid fa-triangle-exclamation";
+    if (newNotif.type === "error") iconClass = "fa-solid fa-circle-xmark";
+    if (newNotif.type === "info") iconClass = "fa-solid fa-circle-info";
 
     const notifElement = document.createElement("div");
     notifElement.className = `notification-item ${newNotif.type}`;
     // Вешаем id на дата-атрибут самой карточки для последующего поиска
     notifElement.setAttribute("data-id", newNotif.id);
     notifElement.innerHTML = `
-        <h4>${newNotif.title}</h4>
-        <p>${newNotif.info}</p>
-        <button class="notification-close">&times;</button>
+    <div class="notification-icon-wrapper">
+                <i class="${iconClass} notification-icon"></i>
+            </div>
+         <div class="notification-content">
+                <h4>${newNotif.title}</h4>
+                <p>${newNotif.info}</p>
+            </div>
+            <button class="notification-close">&times;</button>
     `;
 
     // Добавляем плашку в контейнер
@@ -103,7 +114,7 @@ notificationsContainer.addEventListener("click", (event) => {
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   // Создаем уведомление об успешном создании заказа
-  new Notifications("Успех", "success", "Заказ успешно создан!");
+  new Notifications("Успех", "create", "Заказ успешно создан!");
   // Показываем блок со всеми кнопками управления статусом
   orderBtnsBlock.classList.remove("hidden");
   // Сбрасываем заполненные поля формы
@@ -116,7 +127,7 @@ form.addEventListener("submit", (event) => {
 // });
 
 paidBtn.addEventListener("click", () => {
-  new Notifications("Оплата", "create", "Заказ успешно оплачен");
+  new Notifications("Оплата", "success", "Заказ успешно оплачен");
 });
 
 sentBtn.addEventListener("click", () => {
