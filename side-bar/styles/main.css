@@ -40,7 +40,7 @@ nav {
 
 .nav-menu-item {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   align-items: stretch;
   font-size: 15px;
   color: #222222;
