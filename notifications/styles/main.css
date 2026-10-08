@@ -1,13 +1,18 @@
+/* ==========================================================================
+ГЛОБАЛЬНЫЕ СТИЛИ
+========================================================================== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 body {
-  font-family: Arial, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
   padding: 30px;
   background-color: #f4f6f9;
+  color: #333;
 }
 
 form,
@@ -17,32 +22,117 @@ form,
   border-radius: 12px;
   max-width: 400px;
   margin-bottom: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
-form h2 {
-  padding-bottom: 12px;
+/* ==========================================================================
+СТИЛИ ФОРМЫ
+========================================================================== */
+h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 22px;
+  color: #1a1a1a;
 }
 
-form input,
-form button,
-.order-btns button {
+form input {
   display: block;
   width: 100%;
   margin-bottom: 12px;
   padding: 12px;
   border: 1px solid #ced4da;
   border-radius: 6px;
-  box-sizing: border-box;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+form input:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+form button,
+.order-btns button {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    transform 0.1s;
+}
+
+form button:active,
+.order-btns button:active {
+  transform: scale(0.98);
+}
+
+.order-btns button:last-child {
+  margin-bottom: 0;
 }
 
 .hidden {
   display: none;
 }
 
-/* ==========================================
- СКРОЛЛА И АНИМАЦИЙ
- ========================================== */
+/* ==========================================================================
+ ЦВЕТА КНОПОК И УВЕДОМЛЕНИЙ
+========================================================================== */
+form button[type="submit"],
+.recieved-btn {
+  background-color: #3b82f6;
+  color: white;
+}
+
+form button[type="submit"]:hover,
+.recieved-btn:hover {
+  background-color: #2563eb;
+}
+
+.notification-item.info {
+  background-color: #3b82f6;
+  border-left: 5px solid #1d4ed8;
+}
+
+.paid-btn {
+  background-color: #10b981;
+  color: white;
+}
+
+.paid-btn:hover {
+  background-color: #059669;
+}
+
+.notification-item.success {
+  background-color: #10b981;
+  border-left: 5px solid #047857;
+}
+
+.sent-btn {
+  background-color: #f59e0b;
+  color: white;
+}
+
+.sent-btn:hover {
+  background-color: #d97706;
+}
+
+.notification-item.warning {
+  background-color: #f59e0b;
+  border-left: 5px solid #b45309;
+  color: #1f2937;
+}
+
+/* ==========================================================================
+ КОНТЕЙНЕР УВЕДОМЛЕНИЙ
+========================================================================== */
 .notifications-container {
   position: fixed;
   top: 20px;
@@ -54,42 +144,46 @@ form button,
   display: flex;
   flex-direction: column;
   gap: 12px;
+  scrollbar-width: none;
 }
 
-/* Карточка уведомления */
+.notifications-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* ==========================================================================
+  КАРТОЧКИ УВЕДОМЛЕНИЙ И АНИМАЦИИ
+========================================================================== */
 .notification-item {
   position: relative;
   padding: 16px 40px 16px 16px;
   border-radius: 8px;
   color: white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  font-size: 14px;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
   flex-shrink: 0;
-  background-color: #10b981;
   animation: slideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   transition: all 0.3s ease;
-  scrollbar-width: none; /* Скрывает скроллбар в Firefox */
 }
 
-/* Скрывает скроллбар в Chrome/Safari */
-.notifications-container::-webkit-scrollbar {
-  display: none;
-}
-
-/* Стилизация базовых типов (из прошлых коммитов) */
-.notification-item.success {
-  background-color: #10b981;
-}
-.notification-item.warning {
-  background-color: #f59e0b;
-  color: #1f2937;
-}
-
-/* анимация уезда вправо */
 .notification-item.hide {
   animation: slideOut 0.3s ease forwards;
 }
 
-/* Кнопка закрытия */
+.notification-item h4 {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.notification-item p {
+  margin: 0;
+  opacity: 0.95;
+  line-height: 1.4;
+}
+
 .notification-close {
   position: absolute;
   top: 8px;
@@ -98,15 +192,18 @@ form button,
   border: none;
   color: inherit;
   font-size: 22px;
+  font-weight: 300;
+  line-height: 1;
   cursor: pointer;
   opacity: 0.6;
+  padding: 0;
+  transition: opacity 0.2s;
 }
 
 .notification-close:hover {
   opacity: 1;
 }
 
-/* Ключевые кадры анимаций */
 @keyframes slideIn {
   from {
     transform: translateX(120%);
