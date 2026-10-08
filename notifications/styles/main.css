@@ -46,3 +46,11 @@ form button,
   width: 320px;
   z-index: 9999;
 }
+
+.notification-item {
+  padding: 16px;
+  border-radius: 8px;
+  color: white;
+  margin-bottom: 12px;
+  background-color: #10b981;
+}
