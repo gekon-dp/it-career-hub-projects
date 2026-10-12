@@ -1,0 +1,112 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Главный контейнер собирает слайдер и плашку снизу в один вертикальный блок */
+.frame {
+  width: 500px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ограничиваем область видимости только для одного слайда 500x500 */
+.slider-viewport {
+  width: 500px;
+  height: 500px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Лента со всеми слайдами. Именно она плавно двигается влево/вправо */
+.cards {
+  display: grid;
+  grid-auto-flow: column;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: left 0.5s ease; /* Анимация перелистывания здесь */
+}
+
+.card {
+  width: 500px;
+  height: 500px;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Стрелки навигации */
+.triggers {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  z-index: 2;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.triggers button {
+  width: 50px;
+  font-size: 40px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border: none;
+  color: white;
+  opacity: 0;
+  transition: opacity 0.5s;
+  cursor: pointer;
+}
+
+.triggers button:hover {
+  opacity: 1;
+}
+
+/* ======================================================== */
+/* КОНТЕЙНЕР ПРЕВЬЮ: ТЕМНЫЙ ФОН УБРАН, РАСТЯНУТ НА 500PX     */
+/* ======================================================== */
+.previews {
+  width: 100%; /* Ровно 500px */
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 0 !important; /* Принудительно убираем любые зазоры */
+  padding: 0 !important; /* Убираем внутренние отступы */
+  margin: 0;
+  background: #000; /* Фоновым цветом ставим черный, чтобы даже при микросдвигах не было белых дыр */
+}
+
+.preview-btn {
+  flex: 1 1 0;
+  height: 60px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  border: none;
+  outline: none;
+  opacity: 0.5;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.preview-btn:hover {
+  opacity: 0.8;
+}
+
+/* Состояние активного элемента */
+.preview-btn.active {
+  opacity: 1;
+  box-shadow: inset 0 0 0 3px lightcoral;
+}
+
+/* Самое важное исправление для картинок */
+.preview-btn img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  padding: 0;
+  margin: 0;
+}
