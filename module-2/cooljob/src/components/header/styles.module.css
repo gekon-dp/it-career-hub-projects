@@ -1,11 +1,3 @@
-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  background-color: #cde7ff;
-}
-
 .headerContainer {
   display: flex;
   align-items: center;
@@ -13,6 +5,8 @@ header {
   height: 104px;
   width: 100%;
   padding: 0 100px;
+  background-color: #cde7ff;
+  margin: 0 auto;
 }
 
 .leftColumn {
