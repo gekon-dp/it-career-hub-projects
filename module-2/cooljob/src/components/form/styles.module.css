@@ -1,0 +1,79 @@
+.form {
+  display: flex;
+  align-items: strech;
+  justify-content: center;
+  height: 105px;
+  width: 100%;
+  max-width: 1132px;
+  background-color: #fff;
+  box-shadow: 6px 5px 9px 0px rgba(0, 0, 0, 0.35);
+  z-index: 1;
+}
+
+.formInput {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 30px;
+  gap: 13px;
+  flex: 2 1 0;
+}
+
+.form .formInput:nth-child(2) {
+  position: relative;
+  justify-content: center;
+}
+
+.formInput:nth-child(2)::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 20px;
+  background-color: #000;
+  opacity: 0.5;
+}
+
+.formButton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 0;
+  padding: 0;
+}
+
+.form input {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  font-weight: 400;
+  color: #000;
+  width: 100%;
+}
+
+.form input::placeholder {
+  font-size: 18px;
+  font-weight: 400;
+  color: #000;
+}
+
+.form button {
+  background-color: #274059;
+  color: #fff;
+  border: none;
+  outline: none;
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
