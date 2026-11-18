@@ -3,7 +3,7 @@
   width: 100%;
   max-width: 1920px;
   margin: 0 auto;
-  padding: 92px 100px;
+  padding: 92px 100px 46px;
   background-color: #e4f2ff;
 }
 
@@ -13,6 +13,7 @@
   color: #000;
   margin-bottom: 43px;
 }
+
 .list {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
