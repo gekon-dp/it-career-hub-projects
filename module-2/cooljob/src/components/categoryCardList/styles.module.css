@@ -1,0 +1,42 @@
+.categoryCardList {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 92px 100px;
+  background-color: #e4f2ff;
+}
+
+.categoryCardList h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 43px;
+}
+.list {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  column-gap: 92px;
+  row-gap: 27px;
+  width: 100%;
+  max-width: 1718px;
+  list-style: none;
+}
+
+.moreCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 20px;
+  width: 270px;
+  height: 180px;
+  padding: 29px;
+  border: 2px solid #abb5bf;
+}
+
+.moreCard p {
+  font-size: 16px;
+  font-weight: 500;
+  color: #505559;
+}

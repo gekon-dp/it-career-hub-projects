@@ -59,6 +59,10 @@
   width: 100%;
 }
 
+.form .formInput:nth-child(2) input {
+  width: auto;
+}
+
 .form input::placeholder {
   font-size: 18px;
   font-weight: 400;
