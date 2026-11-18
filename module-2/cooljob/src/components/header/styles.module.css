@@ -1,0 +1,75 @@
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: #cde7ff;
+}
+
+.headerContainer {
+  display: flex;
+  align-items: center;
+  max-width: 1920px;
+  height: 104px;
+  width: 100%;
+  padding: 0 100px;
+}
+
+.leftColumn {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-right: 100px;
+}
+
+.middleColumn {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex: 1 1 auto;
+  margin: 0 60px;
+}
+
+.middleColumn ul {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 53px;
+  list-style: none;
+}
+
+.middleColumn ul li {
+  font-size: 15px;
+  font-weight: 600;
+  color: #000;
+  opacity: 0.8;
+}
+
+.rightColumn {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex: 1 1 auto;
+  gap: 39px;
+}
+
+button {
+  padding: 13px 14px;
+  cursor: pointer;
+  border: none;
+}
+
+.registrationButton {
+  color: #000;
+  font-weight: 400;
+  font-size: 15px;
+  opacity: 0.85;
+  background-color: #cde7ff;
+}
+
+.loginButton {
+  background-color: #fff;
+  color: #000;
+  font-weight: 600;
+  font-size: 15px;
+}
