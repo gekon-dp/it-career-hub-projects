@@ -28,6 +28,8 @@ header {
   align-items: center;
   flex: 1 1 auto;
   margin: 0 60px;
+  min-width: 100px;
+  overflow: hidden;
 }
 
 .middleColumn ul {
@@ -51,6 +53,8 @@ header {
   align-items: center;
   flex: 1 1 auto;
   gap: 39px;
+  min-width: 100px;
+  overflow: hidden;
 }
 
 button {
